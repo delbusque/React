@@ -1,12 +1,11 @@
-import Nested from "./Nested"
+import styles from './Post.module.css'
 
-const Post = () => {
+const Post = ({ author, text }) => {
     return (
-        <main>
-            <h3>Delbusque</h3>
-            <p>Next.js is awesome !</p>
-            <Nested />
-        </main>
+        <li className={styles.post}>
+            <p className={styles.author}>{author}</p>
+            <p className={styles.text}>{text}</p>
+        </li>
     )
 }
 

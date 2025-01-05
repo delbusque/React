@@ -1,10 +1,11 @@
-import Post from "./components/Post";
+import NewPost from "./components/NewPost";
+import PostsList from "./components/PostsList";
 
 function App() {
   return (
     <>
-      <Post />
-      <Post />
+      <NewPost />
+      <PostsList />
     </>
   )
 }
