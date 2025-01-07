@@ -1,13 +1,45 @@
-import Post from './Post'
-import styles from './PostsList.module.css'
+import NewPost from "./NewPost.jsx";
+import Post from "./Post";
+import Modal from "./Modal";
+import styles from "./PostsList.module.css";
+import { useState } from "react";
 
 const PostsList = () => {
-    return (
-        <ul className={styles.posts}>
-            <Post author='Delbusque' text='Next.js is so cool ...' />
-            <Post author='Max' text='JS is awesome !' />
-        </ul>
-    )
-}
+  const [enteredText, setEnteredText] = useState("");
+  const [enteredAuthor, setEnteredAuthor] = useState("");
+  const [isModalVisible, setIsModalVisible] = useState(true);
 
-export default PostsList
+  const changeTextHandler = (e) => {
+    setEnteredText(e.target.value);
+  };
+
+  const changeAuthorHandler = (e) => {
+    setEnteredAuthor(e.target.value);
+  };
+
+  const backdropClickHandler = () => {
+    setIsModalVisible(false);
+  };
+
+  return (
+    <>
+      {isModalVisible ? (
+        <Modal hideModal={backdropClickHandler}>
+          <NewPost
+            enteredText={enteredText}
+            enteredAuthor={enteredAuthor}
+            onBodyChange={changeTextHandler}
+            onAuthorChange={changeAuthorHandler}
+          />
+        </Modal>
+      ) : null}
+
+      <ul className={styles.posts}>
+        <Post author={enteredAuthor} text={enteredText} />
+        <Post author="Max" text="JS is awesome !" />
+      </ul>
+    </>
+  );
+};
+
+export default PostsList;
