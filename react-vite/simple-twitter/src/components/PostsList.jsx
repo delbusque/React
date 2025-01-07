@@ -4,10 +4,9 @@ import Modal from "./Modal";
 import styles from "./PostsList.module.css";
 import { useState } from "react";
 
-const PostsList = () => {
+const PostsList = ({ hideNewPost, isModalVisible }) => {
   const [enteredText, setEnteredText] = useState("");
   const [enteredAuthor, setEnteredAuthor] = useState("");
-  const [isModalVisible, setIsModalVisible] = useState(true);
 
   const changeTextHandler = (e) => {
     setEnteredText(e.target.value);
@@ -17,14 +16,10 @@ const PostsList = () => {
     setEnteredAuthor(e.target.value);
   };
 
-  const backdropClickHandler = () => {
-    setIsModalVisible(false);
-  };
-
   return (
     <>
       {isModalVisible ? (
-        <Modal hideModal={backdropClickHandler}>
+        <Modal hideModal={hideNewPost}>
           <NewPost
             enteredText={enteredText}
             enteredAuthor={enteredAuthor}
