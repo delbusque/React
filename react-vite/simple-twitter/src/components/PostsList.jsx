@@ -1,20 +1,46 @@
+import { useState } from "react";
 import NewPost from "./NewPost.jsx";
 import Post from "./Post";
 import Modal from "./Modal";
 import styles from "./PostsList.module.css";
 
 const PostsList = ({ hideNewPost, isModalVisible }) => {
+  const [posts, setPosts] = useState([]);
+
+  const postDataHandler = (postData) => {
+    setPosts((oldPosts) => [postData, ...oldPosts]);
+  };
+
   return (
     <>
       {isModalVisible ? (
         <Modal hideModal={hideNewPost}>
-          <NewPost hideModal={hideNewPost} />
+          <NewPost hideModal={hideNewPost} addPostData={postDataHandler} />
         </Modal>
       ) : null}
-
-      <ul className={styles.posts}>
-        <Post author="Max" text="JS is awesome !" />
-      </ul>
+      {posts.length > 0 && (
+        <ul className={styles.posts}>
+          {posts.map((post) => (
+            <Post
+              key={Math.random() * 1000}
+              author={post.author}
+              text={post.text}
+            />
+          ))}
+        </ul>
+      )}
+      {posts.length === 0 && (
+        <div
+          style={{
+            textAlign: "center",
+            color: "white",
+            fontFamily: "sans-serif",
+          }}
+        >
+          <h3>There are no posts yet.</h3>
+          <p>Could add some!</p>
+        </div>
+      )}
     </>
   );
 };

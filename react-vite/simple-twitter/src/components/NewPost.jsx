@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "./NewPost.module.css";
 
-const NewPost = ({ hideModal }) => {
+const NewPost = ({ hideModal, addPostData }) => {
   const [enteredText, setEnteredText] = useState("");
   const [enteredAuthor, setEnteredAuthor] = useState("");
 
@@ -19,7 +19,7 @@ const NewPost = ({ hideModal }) => {
       text: enteredText,
       author: enteredAuthor,
     };
-    console.log(postData);
+    addPostData(postData);
     hideModal();
   };
 
