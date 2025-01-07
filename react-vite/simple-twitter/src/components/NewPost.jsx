@@ -1,15 +1,43 @@
-import classes from "./NewPost.module.css";
+import { useState } from "react";
+import styles from "./NewPost.module.css";
 
-const NewPost = ({ onBodyChange, onAuthorChange }) => {
+const NewPost = ({ hideModal }) => {
+  const [enteredText, setEnteredText] = useState("");
+  const [enteredAuthor, setEnteredAuthor] = useState("");
+
+  const changeTextHandler = (e) => {
+    setEnteredText(e.target.value);
+  };
+
+  const changeAuthorHandler = (e) => {
+    setEnteredAuthor(e.target.value);
+  };
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    const postData = {
+      text: enteredText,
+      author: enteredAuthor,
+    };
+    console.log(postData);
+    hideModal();
+  };
+
   return (
-    <form className={classes.form}>
+    <form className={styles.form} onSubmit={submitHandler}>
       <p>
         <label htmlFor="body">Text</label>
-        <textarea id="body" required rows={3} onChange={onBodyChange} />
+        <textarea id="body" required rows={3} onChange={changeTextHandler} />
       </p>
       <p>
         <label htmlFor="name">Your name</label>
-        <input type="text" id="name" required onChange={onAuthorChange} />
+        <input type="text" id="name" required onChange={changeAuthorHandler} />
+      </p>
+      <p className={styles.actions}>
+        <button type="button" onClick={hideModal}>
+          Cancel
+        </button>
+        <button>Submit</button>
       </p>
     </form>
   );
