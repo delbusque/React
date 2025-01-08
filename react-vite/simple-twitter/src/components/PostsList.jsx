@@ -8,6 +8,11 @@ const PostsList = ({ hideNewPost, isModalVisible }) => {
   const [posts, setPosts] = useState([]);
 
   const postDataHandler = (postData) => {
+    fetch("http://localhost:8080/posts", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(postData),
+    });
     setPosts((oldPosts) => [postData, ...oldPosts]);
   };
 
