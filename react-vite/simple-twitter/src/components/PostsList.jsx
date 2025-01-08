@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import NewPost from "./NewPost.jsx";
 import Post from "./Post";
 import Modal from "./Modal";
@@ -6,6 +6,15 @@ import styles from "./PostsList.module.css";
 
 const PostsList = ({ hideNewPost, isModalVisible }) => {
   const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    const getPosts = async () => {
+      const response = await fetch("http://localhost:8080/posts");
+      const resData = await response.json();
+      setPosts(resData.posts);
+    };
+    getPosts();
+  }, []);
 
   const postDataHandler = (postData) => {
     fetch("http://localhost:8080/posts", {
