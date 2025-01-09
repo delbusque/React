@@ -1,19 +1,22 @@
 import { useState, useEffect } from "react";
-import NewPost from "./NewPost.jsx";
+import NewPost from "../routes/NewPost.jsx";
 import Post from "./Post";
 import Modal from "./Modal";
 import styles from "./PostsList.module.css";
 
 const PostsList = ({ hideNewPost, isModalVisible }) => {
   const [posts, setPosts] = useState([]);
+  const [isFetching, setIsFetching] = useState(false);
 
   useEffect(() => {
-    const getPosts = async () => {
+    setIsFetching(true);
+    const fetchPosts = async () => {
       const response = await fetch("http://localhost:8080/posts");
       const resData = await response.json();
       setPosts(resData.posts);
+      setIsFetching(false);
     };
-    getPosts();
+    fetchPosts();
   }, []);
 
   const postDataHandler = (postData) => {
@@ -32,7 +35,7 @@ const PostsList = ({ hideNewPost, isModalVisible }) => {
           <NewPost hideModal={hideNewPost} addPostData={postDataHandler} />
         </Modal>
       ) : null}
-      {posts.length > 0 && (
+      {!isFetching && posts.length > 0 && (
         <ul className={styles.posts}>
           {posts.map((post) => (
             <Post
@@ -43,7 +46,7 @@ const PostsList = ({ hideNewPost, isModalVisible }) => {
           ))}
         </ul>
       )}
-      {posts.length === 0 && (
+      {!isFetching && posts.length === 0 && (
         <div
           style={{
             textAlign: "center",
@@ -53,6 +56,17 @@ const PostsList = ({ hideNewPost, isModalVisible }) => {
         >
           <h3>There are no posts yet.</h3>
           <p>Could add some!</p>
+        </div>
+      )}
+      {isFetching && (
+        <div
+          style={{
+            textAlign: "center",
+            color: "white",
+            fontFamily: "sans-serif",
+          }}
+        >
+          <p>Loading posts... </p>
         </div>
       )}
     </>
