@@ -10,7 +10,12 @@ const PostsList = () => {
       {posts.length > 0 && (
         <ul className={styles.posts}>
           {posts.map((post) => (
-            <Post key={post.text} author={post.author} text={post.text} />
+            <Post
+              key={post.text}
+              author={post.author}
+              text={post.text}
+              id={post.id}
+            />
           ))}
         </ul>
       )}
