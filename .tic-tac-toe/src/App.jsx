@@ -1,40 +1,22 @@
-import { useState } from 'react'
-import logo from './assets/toe-logo.png'
 import './App.css'
+import { useState } from 'react'
 
-const boardArr = [
-  [null, null, null],
-  [null, null, null],
-  [null, null, null]
-]
+import Logo from './components/Logo'
+import Player from './components/Player'
+import Board from './components/Board'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <div className='logo-cont'>
-        <img src={logo} className='logo' alt='tic-tac-toe-logo' />
-        <h2 className='logo-text'>Tic-Tac-Toe</h2>
-      </div>
+      <Logo />
       <div className='game-cont'>
         <div className='player-cont'>
-          <div className='player'>
-            <input className="player-input" type="text" value='Player 1' />
-            <div>X</div>
-            <button>Edit</button>
-          </div>
-          <div className='player'>
-            <input className="player-input" type="text" value='Player 2' />
-            <div>O</div>
-            <button className='player-btn'>Edit</button>
-          </div>
+          <Player />
+          <Player />
         </div>
-        <div className='board-cont'>
-          {boardArr.map(row => <div>{row.map(col => <button className='board-btn'>{col}</button>)}</div>)}
-        </div>
+        <Board />
       </div>
-
     </>
   )
 }
