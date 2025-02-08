@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Barriecito&display=swap');
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  margin-top: 30px;
+  will-change: filter;
+  transition: filter 300ms;
+}
+
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+.logo-text {
+  font-family: "Barriecito", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 34px;
+  margin: 15px 0 20px 0;
+}
+
+.game-cont {
+  display: flex;
+  flex-direction: column;
+  background-color: antiquewhite;
+  width: 700px;
+  padding: 30px;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.player-cont {
+  display: flex;
+  gap: 70px;
+}
+
+.player {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.player-input {
+  padding: 7px;
+  border: 0px solid burlywood
+}
+
+.board-cont {
+  margin: 30px 30px 0 30px;
+}
+
+.board-btn {
+  margin: 10px;
+  width: 100px;
+  height: 100px;
+}
