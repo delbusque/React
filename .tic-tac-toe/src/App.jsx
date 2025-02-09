@@ -12,8 +12,8 @@ function App() {
       <Logo />
       <div className='game-cont'>
         <div className='player-cont'>
-          <Player />
-          <Player />
+          <Player defaultPlayer={{ name: 'Player 1', symbol: 'X' }} />
+          <Player defaultPlayer={{ name: 'Player 2', symbol: 'O' }} />
         </div>
         <Board />
       </div>

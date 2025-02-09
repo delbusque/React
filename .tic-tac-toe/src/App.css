@@ -57,7 +57,7 @@ button:focus-visible {
   display: flex;
   flex-direction: column;
   background-color: #2a2727;
-  width: 700px;
+  max-width: 700px;
   padding: 30px;
   align-items: center;
   margin-bottom: 30px;
@@ -78,7 +78,16 @@ button:focus-visible {
 .player-input {
   padding: 7px;
   border: 0px solid burlywood;
+  color: rgb(74, 103, 103);
+  background-color: #2c2a2a;
+  pointer-events: none;
+}
+
+.player-input-edit {
+  padding: 7px;
+  border: 0px solid burlywood;
   background-color: darkslategray;
+  pointer-events: visible;
 }
 
 .player-input:focus {
@@ -92,6 +101,10 @@ button:focus-visible {
 
 .board-cont {
   margin: 30px 30px 0 30px;
+}
+
+.board-row {
+  display: flex;
 }
 
 .board-btn {
