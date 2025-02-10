@@ -25,6 +25,9 @@ const Board = () => {
     </div>
   ));
 
+  // const ltr = board.map((row) => row.filter((col) => col !== null));
+  // const res = ltr.filter((arr) => arr.length === 0);
+
   const turnHandler = (row, col) => {
     turn === "X" ? (board[row][col] = "X") : (board[row][col] = "O");
     setTurn((oldTurn) => (oldTurn === "X" ? (oldTurn = "O") : (oldTurn = "X")));
