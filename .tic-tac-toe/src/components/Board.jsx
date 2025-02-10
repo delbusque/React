@@ -1,39 +1,39 @@
 import { useState } from "react";
 
-const boardArr = [
+const initialBoard = [
   [null, null, null],
   [null, null, null],
   [null, null, null],
 ];
 
 const Board = () => {
-  const [turn, setTurn] = useState("X");
+  const [gameBoard, setGameBoard] = useState(initialBoard);
 
-  let board = boardArr;
-
-  const gameBoard = board.map((row, rowIndex) => (
-    <div className="board-row" key={rowIndex}>
-      {row.map((col, colIndex) => (
-        <button
-          className="board-btn"
-          key={colIndex}
-          onClick={() => turnHandler(rowIndex, colIndex)}
-        >
-          {board[rowIndex][colIndex]}
-        </button>
-      ))}
-    </div>
-  ));
-
-  // const ltr = board.map((row) => row.filter((col) => col !== null));
-  // const res = ltr.filter((arr) => arr.length === 0);
-
-  const turnHandler = (row, col) => {
-    turn === "X" ? (board[row][col] = "X") : (board[row][col] = "O");
-    setTurn((oldTurn) => (oldTurn === "X" ? (oldTurn = "O") : (oldTurn = "X")));
+  const turnHandler = (rowIndex, colIndex) => {
+    setGameBoard((prevGameBoard) => {
+      const updatedBoard = [...prevGameBoard.map((boardRow) => [...boardRow])];
+      updatedBoard[rowIndex][colIndex] = "X";
+      return updatedBoard;
+    });
   };
 
-  return <div className="board-cont">{gameBoard}</div>;
+  return (
+    <div className="board-cont">
+      {gameBoard.map((row, rowIndex) => (
+        <div className="board-row" key={rowIndex}>
+          {row.map((playerSymbol, colIndex) => (
+            <button
+              className="board-btn"
+              key={colIndex}
+              onClick={() => turnHandler(rowIndex, colIndex)}
+            >
+              {playerSymbol}
+            </button>
+          ))}
+        </div>
+      ))}
+    </div>
+  );
 };
 
 export default Board;
