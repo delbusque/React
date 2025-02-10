@@ -6,15 +6,17 @@ const initialBoard = [
   [null, null, null],
 ];
 
-const Board = () => {
+const Board = ({ changeActivePlayer, activePlayer }) => {
   const [gameBoard, setGameBoard] = useState(initialBoard);
 
   const turnHandler = (rowIndex, colIndex) => {
     setGameBoard((prevGameBoard) => {
       const updatedBoard = [...prevGameBoard.map((boardRow) => [...boardRow])];
-      updatedBoard[rowIndex][colIndex] = "X";
+      updatedBoard[rowIndex][colIndex] = activePlayer;
       return updatedBoard;
     });
+
+    changeActivePlayer();
   };
 
   return (

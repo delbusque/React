@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Player = ({ defaultPlayer }) => {
+const Player = ({ defaultPlayer, isActive }) => {
   const [player, setPlayer] = useState(defaultPlayer.name);
   const [isEditing, setIsEditing] = useState(false);
 
@@ -13,7 +13,7 @@ const Player = ({ defaultPlayer }) => {
   };
 
   return (
-    <div className="player">
+    <div className={isActive ? "player-active" : "player"}>
       <input
         className={isEditing ? "player-input-edit" : "player-input"}
         type="text"
