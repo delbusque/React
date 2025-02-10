@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Barriecito&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Barriecito&display=swap");
 
 #root {
   max-width: 1280px;
@@ -21,7 +21,8 @@ button {
 button:hover {
   background-color: darkslategray;
   color: #242424;
-  box-shadow: rgba(123, 123, 130, 0.25) 0px 13px 27px -5px, rgba(163, 142, 142, 0.3) 0px 8px 16px -8px;
+  box-shadow: rgba(123, 123, 130, 0.25) 0px 13px 27px -5px,
+    rgba(163, 142, 142, 0.3) 0px 8px 16px -8px;
 }
 
 button:focus,
@@ -112,8 +113,23 @@ button:focus-visible {
   width: 100px;
   height: 100px;
   background-color: darkslategray;
+  color: #242424;
+  font-size: 46px;
+  font-family: "Barriecito", serif;
+}
+
+.board-btn-dis {
+  margin: 10px;
+  width: 100px;
+  height: 100px;
+  background-color: rgb(76, 78, 78);
+  color: #242424;
+  font-size: 46px;
+  font-family: "Barriecito", serif;
+  pointer-events: none;
 }
 
 .board-btn:hover {
-  box-shadow: rgba(123, 123, 130, 0.25) 0px 13px 27px -5px, rgba(163, 142, 142, 0.3) 0px 8px 16px -8px;
+  box-shadow: rgba(123, 123, 130, 0.25) 0px 13px 27px -5px,
+    rgba(163, 142, 142, 0.3) 0px 8px 16px -8px;
 }
