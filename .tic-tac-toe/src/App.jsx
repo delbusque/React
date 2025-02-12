@@ -30,8 +30,9 @@ function App() {
 
   const [players, setPlayers] = useState({
     'X': 'Player 1',
-    'Y': 'Player 2'
+    'O': 'Player 2'
   })
+
   const [gameTurns, setGameTurns] = useState([])
 
   gameTurns.map(turn => {
@@ -53,7 +54,7 @@ function App() {
     let thirdSymbol = gameBoard[combo[2].row][combo[2].col]
 
     if (firstSymbol && (firstSymbol === secondSymbol && firstSymbol === thirdSymbol)) {
-      winner = firstSymbol;
+      winner = players[firstSymbol];
     }
   }
 
@@ -101,7 +102,7 @@ function App() {
             changeName={playerNameHandler}
           />
         </div>
-        {(winner || hasDraw) && <GameOver winner={players[winner]}
+        {(winner || hasDraw) && <GameOver winner={winner}
           restartGame={restartHandler} />}
         <Board
           activePlayer={gameTurns.player}

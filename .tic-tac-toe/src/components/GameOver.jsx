@@ -1,5 +1,4 @@
-export default function GameOver({ winner, restartGame, isDraw }) {
-    console.log(winner);
+export default function GameOver({ winner, restartGame }) {
 
     return (
         <div id="game-over">
