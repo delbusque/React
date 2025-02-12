@@ -4,14 +4,22 @@ import { useState } from "react";
 import Logo from "./components/Logo";
 import Player from "./components/Player";
 import Board from "./components/Board";
+import Log from "./components/Log";
 
 function App() {
-  const [isActive, setIsActive] = useState("X");
+  const [gameTurns, setGameTurns] = useState([])
 
-  const activePlayerHandler = () => {
-    setIsActive((current) =>
-      current === "X" ? (current = "O") : (current = "X")
-    );
+  const turnHandler = (rowIndex, colIndex) => {
+    setIsActive((current) => current === "X" ? (current = "O") : (current = "X"))
+
+    setGameTurns(prevTurns => {
+      let currentPlayer = "X";
+      if (prevTurns.length > 0 && prevTurns[0].player === "X") {
+        currentPlayer = 'O'
+      }
+      let updatedTurns = [{ square: { row: rowIndex, col: colIndex }, player: currentPlayer }, ...prevTurns]
+      return updatedTurns;
+    })
   };
 
   return (
@@ -31,9 +39,12 @@ function App() {
         </div>
 
         <Board
-          changeActivePlayer={activePlayerHandler}
-          activePlayer={isActive}
+          activePlayer={gameTurns.player}
+          changeTurn={turnHandler}
+          turns={gameTurns}
         />
+
+        <Log turns={gameTurns} />
       </div>
     </>
   );

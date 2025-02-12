@@ -1,4 +1,4 @@
-import { useState } from "react";
+// import { useState } from "react";
 
 const initialBoard = [
   [null, null, null],
@@ -6,18 +6,16 @@ const initialBoard = [
   [null, null, null],
 ];
 
-const Board = ({ changeActivePlayer, activePlayer }) => {
-  const [gameBoard, setGameBoard] = useState(initialBoard);
+const Board = ({ activePlayer, changeTurn, turns }) => {
 
-  const turnHandler = (rowIndex, colIndex) => {
-    setGameBoard((prevGameBoard) => {
-      const updatedBoard = [...prevGameBoard.map((boardRow) => [...boardRow])];
-      updatedBoard[rowIndex][colIndex] = activePlayer;
-      return updatedBoard;
-    });
+  let gameBoard = initialBoard;
+  console.log(turns);
 
-    changeActivePlayer();
-  };
+  turns?.map(turn => {
+    const { square, player } = turn
+    const { row, col } = square
+    gameBoard[row][col] = player
+  })
 
   return (
     <div className="board-cont">
@@ -27,7 +25,7 @@ const Board = ({ changeActivePlayer, activePlayer }) => {
             <button
               className="board-btn"
               key={colIndex}
-              onClick={() => turnHandler(rowIndex, colIndex)}
+              onClick={() => changeTurn(rowIndex, colIndex)}
             >
               {playerSymbol}
             </button>
