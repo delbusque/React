@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Player = ({ defaultPlayer, isActive }) => {
+const Player = ({ defaultPlayer, isActive, changeName }) => {
   const [player, setPlayer] = useState(defaultPlayer.name);
   const [isEditing, setIsEditing] = useState(false);
 
@@ -10,6 +10,7 @@ const Player = ({ defaultPlayer, isActive }) => {
 
   const editNameHandler = () => {
     setIsEditing((editing) => !editing);
+    changeName(defaultPlayer.symbol, player)
   };
 
   return (
