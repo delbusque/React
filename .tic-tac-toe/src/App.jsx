@@ -7,45 +7,20 @@ import Board from "./components/Board";
 import Log from "./components/Log";
 import GameOver from "./components/GameOver";
 
-const initialBoard = [
-  [null, null, null],
-  [null, null, null],
-  [null, null, null],
-];
+import { WINNING_COMBOS, PLAYERS, INITIAL_BOARD } from './constants.js'
 
-const WINNING_COMBOS = [
-  [{ row: 0, col: 0 }, { row: 0, col: 1 }, { row: 0, col: 2 }],
-  [{ row: 1, col: 0 }, { row: 1, col: 1 }, { row: 1, col: 2 }],
-  [{ row: 2, col: 0 }, { row: 2, col: 1 }, { row: 2, col: 2 }],
-  [{ row: 0, col: 0 }, { row: 1, col: 0 }, { row: 2, col: 0 }],
-  [{ row: 0, col: 1 }, { row: 1, col: 1 }, { row: 2, col: 1 }],
-  [{ row: 0, col: 2 }, { row: 1, col: 2 }, { row: 2, col: 2 }],
-  [{ row: 0, col: 0 }, { row: 1, col: 1 }, { row: 2, col: 2 }],
-  [{ row: 0, col: 2 }, { row: 1, col: 1 }, { row: 2, col: 0 }],
-]
-
-function App() {
-
-  let gameBoard = [...initialBoard.map(inner => [...inner])];
-
-  const [players, setPlayers] = useState({
-    'X': 'Player 1',
-    'O': 'Player 2'
-  })
-
-  const [gameTurns, setGameTurns] = useState([])
+function deriveGameBoard(gameTurns) {
+  let gameBoard = [...INITIAL_BOARD.map(inner => [...inner])];
 
   gameTurns.map(turn => {
     const { square, player } = turn
     const { row, col } = square
     gameBoard[row][col] = player
   })
+  return gameBoard
+}
 
-  let activePlayer = "X";
-  if (gameTurns.length > 0 && gameTurns[0].player === "X") {
-    activePlayer = 'O'
-  }
-
+function deriveWinner(gameBoard, players) {
   let winner;
 
   for (const combo of WINNING_COMBOS) {
@@ -57,6 +32,24 @@ function App() {
       winner = players[firstSymbol];
     }
   }
+  return winner;
+}
+
+function deriveActivePlayer(gameTurns) {
+  let activePlayer = "X";
+  if (gameTurns.length > 0 && gameTurns[0].player === "X") {
+    activePlayer = 'O'
+  }
+  return activePlayer;
+}
+
+function App() {
+  const [players, setPlayers] = useState(PLAYERS)
+  const [gameTurns, setGameTurns] = useState([])
+
+  const gameBoard = deriveGameBoard(gameTurns);
+  const activePlayer = deriveActivePlayer(gameTurns)
+  const winner = deriveWinner(gameBoard, players)
 
   const hasDraw = gameTurns.length === 9 && !winner;
 
@@ -92,12 +85,12 @@ function App() {
       <div className="game-cont">
         <div className="player-cont">
           <Player
-            defaultPlayer={{ name: "Player 1", symbol: "X" }}
+            defaultPlayer={{ name: PLAYERS.X, symbol: 'X' }}
             isActive={activePlayer === "X"}
             changeName={playerNameHandler}
           />
           <Player
-            defaultPlayer={{ name: "Player 2", symbol: "O" }}
+            defaultPlayer={{ name: PLAYERS.O, symbol: 'O' }}
             isActive={activePlayer === "O"}
             changeName={playerNameHandler}
           />
