@@ -142,3 +142,25 @@ button:focus-visible {
   box-shadow: rgba(123, 123, 130, 0.25) 0px 13px 27px -5px,
     rgba(163, 142, 142, 0.3) 0px 8px 16px -8px;
 }
+
+.log {
+  max-width: 20rem;
+  color: darkslategray;
+  list-style: none;
+  margin: 2rem auto;
+  padding: 0;
+  text-align: center;
+  font-family: "Barriecito", serif;
+
+}
+
+.log li {
+  border-radius: 4px;
+  /* animation: slide-in-from-left 5s cubic-bezier(0.075, 0.82, 0.165, 1) forwards; */
+  margin: 0.75rem;
+}
+
+.log li.highlighted {
+  background-color: #3f3b00;
+  color: white;
+}
