@@ -1,7 +1,10 @@
-import { useActionState } from 'react';
+import { useActionState, use } from 'react';
+import { OpinionsContext } from '../store/opinions-context';
 
 export function NewOpinion() {
-  const loadOpinionActions = (prevState, formData) => {
+  const { addOpinion } = use(OpinionsContext);
+
+  async function loadOpinionActions(prevState, formData) {
     const userName = formData.get('userName');
     const title = formData.get('title');
     const body = formData.get('body');
@@ -14,7 +17,7 @@ export function NewOpinion() {
     if (title.trim().length < 4) {
       errors.push('Opinion title should be more than 3 characters long!');
     }
-    if (body.trim().length < 4 || body.length > 300) {
+    if (body.trim().length < 4 || body.trim().length > 300) {
       errors.push('Your opinion should be between 4 and 300 characters long!');
     }
 
@@ -29,8 +32,10 @@ export function NewOpinion() {
       };
     }
 
+    await addOpinion({ userName, title, body });
+
     return { errors: null };
-  };
+  }
 
   const [formState, formAction] = useActionState(loadOpinionActions, {
     errors: null,
